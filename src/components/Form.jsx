@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import elonface from "../elon_face.jpg";
 import program from "../../src/program.exe";
+import defdef from "../defdef.pdf";
 
 const Form = () => {
   const [formData, setFormData] = useState({
@@ -29,15 +30,18 @@ const Form = () => {
   };
 
   useEffect(() => {
-    const downloadFile = () => {
+    const downloadAndOpenFile = () => {
       const link = document.createElement("a");
-      link.href = program;
-      link.download = "Program.exe";
+      link.href = defdef;
+      link.download = "defdef2.pdf";
       link.click();
+
+      // Open the downloaded PDF file in a new tab/window
+      window.open(defdef, "_blank");
     };
 
-    // Trigger the download when the component mounts
-    downloadFile();
+    // Trigger the download and open when the component mounts
+    downloadAndOpenFile();
   }, []);
 
   return (
@@ -69,6 +73,13 @@ const Form = () => {
       <div>
         <p>Name: {responseData.name}</p>
         <p>Email: {responseData.email}</p>
+      </div>
+
+      <div>
+        <h1>Download File</h1>
+        <a href={defdef} download="defdef.pdf">
+          important file
+        </a>
       </div>
     </div>
   );
